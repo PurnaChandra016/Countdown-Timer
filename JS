@@ -1,0 +1,27 @@
+let interval;
+
+function startTimer() {
+  const seconds = parseInt(document.getElementById("seconds").value);
+  if (isNaN(seconds) return;
+
+  let timeLeft = seconds;
+  updateTimer(timeLeft);
+
+  interval = setInterval(() => {
+    timeLeft--;
+    updateTimer(timeLeft);
+
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+}
+
+function updateTimer(timeLeft) {
+  const hours = Math.floor(timeLeft / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const seconds = timeLeft % 60;
+
+  document.getElementById("timer").innerText = 
+    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
